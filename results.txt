@@ -1,0 +1,50 @@
+AGENTIC AI RESEARCH SUMMARY
+===========================
+
+Source: deeplearning.ai
+Term Selected: "Agentic AI"
+
+OVERVIEW
+--------
+Agentic AI refers to AI systems that can autonomously plan, reason, and execute tasks with minimal human intervention. This emerging field focuses on creating trustworthy, policy-aligned AI agents capable of operating in enterprise environments.
+
+PAPER 1: Trustworthy AI in the Agentic Lakehouse
+-------------------------------------------------
+Authors: Jacopo Tagliabue, Federico Bianchi, Ciro Greco
+Published: November 20, 2025
+arXiv ID: 2511.16402v1
+
+Key Findings:
+- Most enterprises don't consider AI agents trustworthy enough for production data
+- Traditional data lakehouses aren't suited for agent access patterns
+- Proposes "Bauplan" - an agent-first design that reimplements data and compute isolation
+- Draws operational analogy to MVCC (Multi-Version Concurrency Control) in databases
+- Demonstrates a self-healing pipeline that couples agent reasoning with correctness guarantees
+- Focus: Infrastructure-first approach to trustworthy agentic workflows
+
+PAPER 2: POLARIS - Typed Planning and Governed Execution
+---------------------------------------------------------
+Authors: Zahra Moslemi, Keerthi Koneru, Yen-Ting Lee, Sheethal Kumar, Ramesh Radhakrishnan
+Published: January 16, 2026
+arXiv ID: 2601.11816v1
+
+Key Findings:
+- Addresses enterprise back-office automation requiring auditable, policy-aligned systems
+- POLARIS = Policy-Aware LLM Agentic Reasoning for Integrated Systems
+- Uses typed plan synthesis with DAG (Directed Acyclic Graph) structures
+- Implements validator-gated checks and bounded repair loops
+- Achieves micro F1 of 0.81 on SROIE dataset
+- Achieves 0.95-1.00 precision for anomaly routing with audit trails
+- Focus: Governance and policy compliance in agentic systems
+
+KEY THEMES
+----------
+1. Trust and Governance: Both papers emphasize the critical need for trustworthy, auditable AI agents in enterprise settings
+2. Infrastructure Design: Purpose-built systems are needed to support agentic workflows
+3. Policy Compliance: Ensuring AI agents operate within defined boundaries and regulations
+4. Practical Applications: Focus on real-world enterprise use cases (data pipelines, back-office automation)
+5. Validation and Safety: Multiple layers of checks to prevent errors and ensure correctness
+
+CONCLUSION
+----------
+The research on Agentic AI is rapidly evolving to address enterprise concerns around trust, governance, and operational reliability. Both papers demonstrate that successful deployment of AI agents requires careful architectural design that prioritizes safety, auditability, and policy compliance alongside autonomous capabilities.

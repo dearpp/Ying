@@ -1,0 +1,176 @@
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                    MODEL CONTEXT PROTOCOL (MCP) ARCHITECTURE                      ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                              MCP HOST (AI Application)                          │
+│                    (e.g., Claude Desktop, VS Code, Claude Code)                 │
+│                                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐               │
+│  │   MCP Client 1  │  │   MCP Client 2  │  │   MCP Client N  │               │
+│  │                 │  │                 │  │                 │               │
+│  │  Manages one    │  │  Manages one    │  │  Manages one    │               │
+│  │  connection     │  │  connection     │  │  connection     │               │
+│  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘               │
+│           │                    │                     │                         │
+└───────────┼────────────────────┼─────────────────────┼─────────────────────────┘
+            │                    │                     │
+            │                    │                     │
+┌───────────▼────────────────────▼─────────────────────▼─────────────────────────┐
+│                        TRANSPORT LAYER (Outer Layer)                            │
+│                                                                                 │
+│  ┌─────────────────────────┐          ┌─────────────────────────────────────┐  │
+│  │   STDIO Transport       │          │   Streamable HTTP Transport         │  │
+│  │   (Local)               │          │   (Remote)                          │  │
+│  │                         │          │                                     │  │
+│  │ • Standard input/output │          │ • HTTP POST (client→server)         │  │
+│  │ • Direct process comm   │          │ • Server-Sent Events (streaming)    │  │
+│  │ • No network overhead   │          │ • OAuth, API keys, bearer tokens    │  │
+│  │ • Single client         │          │ • Multiple clients                  │  │
+│  └─────────────────────────┘          └─────────────────────────────────────┘  │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+            │                                          │
+            │        JSON-RPC 2.0 Message Format       │
+            │                                          │
+┌───────────▼──────────────────────────────────────────▼─────────────────────────┐
+│                          DATA LAYER (Inner Layer)                               │
+│                                                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │                      LIFECYCLE MANAGEMENT                                │   │
+│  │  • Connection initialization                                             │   │
+│  │  • Capability negotiation                                                │   │
+│  │  • Connection termination                                                │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │                         PRIMITIVES                                       │   │
+│  │                                                                          │   │
+│  │  ┌──────────────────────────────────────────────────────────────────┐   │   │
+│  │  │  SERVER PRIMITIVES (What servers expose to clients)             │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  ╔═══════════╗      ╔═══════════╗      ╔═══════════╗            │   │   │
+│  │  │  ║  TOOLS    ║      ║ RESOURCES ║      ║  PROMPTS  ║            │   │   │
+│  │  │  ╚═══════════╝      ╚═══════════╝      ╚═══════════╝            │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  Executable         Data sources      Reusable templates        │   │   │
+│  │  │  functions          for context       for interactions          │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  • tools/list      • */list           • */list                  │   │   │
+│  │  │  • tools/call      • */get            • */get                   │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  Examples:         Examples:          Examples:                 │   │   │
+│  │  │  - File ops        - File contents    - System prompts          │   │   │
+│  │  │  - API calls       - DB records       - Few-shot examples       │   │   │
+│  │  │  - DB queries      - API responses                              │   │   │
+│  │  └──────────────────────────────────────────────────────────────────┘   │   │
+│  │                                                                          │   │
+│  │  ┌──────────────────────────────────────────────────────────────────┐   │   │
+│  │  │  CLIENT PRIMITIVES (What clients expose to servers)             │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  ╔═══════════╗      ╔═════════════╗      ╔═══════════╗          │   │   │
+│  │  │  ║ SAMPLING  ║      ║ ELICITATION ║      ║  LOGGING  ║          │   │   │
+│  │  │  ╚═══════════╝      ╚═════════════╝      ╚═══════════╝          │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  LLM completions    Request user       Debug/monitor            │   │   │
+│  │  │  from client        input/confirm      messages                 │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  sampling/          elicitation/                                │   │   │
+│  │  │  complete           request                                     │   │   │
+│  │  └──────────────────────────────────────────────────────────────────┘   │   │
+│  │                                                                          │   │
+│  │  ┌──────────────────────────────────────────────────────────────────┐   │   │
+│  │  │  UTILITY PRIMITIVES                                              │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  ╔═════════════════════╗                                         │   │   │
+│  │  │  ║ TASKS (Experimental)║                                         │   │   │
+│  │  │  ╚═════════════════════╝                                         │   │   │
+│  │  │                                                                  │   │   │
+│  │  │  Durable execution wrappers for:                                │   │   │
+│  │  │  - Deferred result retrieval                                    │   │   │
+│  │  │  - Status tracking                                              │   │   │
+│  │  │  - Long-running operations                                      │   │   │
+│  │  └──────────────────────────────────────────────────────────────────┘   │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │                         NOTIFICATIONS                                    │   │
+│  │  • Real-time updates (no response required)                              │   │
+│  │  • JSON-RPC 2.0 notification messages                                    │   │
+│  │  • Example: Tool update notifications                                    │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                 │
+└───────────────────────────────────────────────────┬─────────────────────────────┘
+                                                    │
+                                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                            MCP SERVER (Context Provider)                        │
+│                                                                                 │
+│  Examples:                                                                      │
+│  • Filesystem server (local - STDIO)                                           │
+│  • Sentry MCP server (remote - HTTP)                                           │
+│  • Database server (exposes tools, resources, prompts)                         │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                           EXAMPLE: DATABASE MCP SERVER                            ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+                         ┌─────────────────────────┐
+                         │   MCP Database Server   │
+                         └────────────┬────────────┘
+                                      │
+                    ┌─────────────────┼─────────────────┐
+                    │                 │                 │
+                    ▼                 ▼                 ▼
+           ┌────────────────┐ ┌──────────────┐ ┌──────────────┐
+           │  TOOLS         │ │  RESOURCES   │ │  PROMPTS     │
+           │                │ │              │ │              │
+           │ • query_db()   │ │ • DB schema  │ │ • Few-shot   │
+           │ • insert()     │ │ • Table list │ │   examples   │
+           │ • update()     │ │              │ │ • Query tips │
+           └────────────────┘ └──────────────┘ └──────────────┘
+
+
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                            COMMUNICATION FLOW                                     ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+    Client                                                    Server
+      │                                                          │
+      │  1. Initialize connection (lifecycle)                   │
+      ├─────────────────────────────────────────────────────────>│
+      │                                                          │
+      │  2. Negotiate capabilities                              │
+      │<────────────────────────────────────────────────────────┤
+      │                                                          │
+      │  3. tools/list (discover available tools)               │
+      ├─────────────────────────────────────────────────────────>│
+      │                                                          │
+      │  4. Return list of tools                                │
+      │<────────────────────────────────────────────────────────┤
+      │                                                          │
+      │  5. tools/call (execute a tool)                         │
+      ├─────────────────────────────────────────────────────────>│
+      │                                                          │
+      │  6. Return tool result                                  │
+      │<────────────────────────────────────────────────────────┤
+      │                                                          │
+      │  7. Notification (tool changed)                         │
+      │<- - - - - - - - - - - - - - - - - - - - - - - - - - - -─┤
+      │     (no response expected)                              │
+      │                                                          │
+
+
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                                    KEY POINTS                                     ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+✓ Client-Server Architecture: Host manages multiple clients, each connected to a server
+✓ Two-Layer Design: Transport layer (outer) + Data layer (inner)
+✓ JSON-RPC 2.0: Standard protocol for all communication
+✓ Dynamic Discovery: Use */list methods to discover primitives
+✓ Flexible Transport: Local (STDIO) or Remote (HTTP)
+✓ Rich Primitives: Tools, Resources, Prompts (server) + Sampling, Elicitation, Logging (client)
+✓ Real-time Updates: Notification system for dynamic changes

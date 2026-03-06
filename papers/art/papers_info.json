@@ -1,0 +1,29 @@
+{
+  "1910.04639v3": {
+    "title": "Visual Indeterminacy in GAN Art",
+    "authors": [
+      "Aaron Hertzmann"
+    ],
+    "summary": "This paper explores visual indeterminacy as a description for artwork created with Generative Adversarial Networks (GANs). Visual indeterminacy describes images which appear to depict real scenes, but, on closer examination, defy coherent spatial interpretation. GAN models seem to be predisposed to producing indeterminate images, and indeterminacy is a key feature of much modern representational art, as well as most GAN art. It is hypothesized that indeterminacy is a consequence of a powerful-but-imperfect image synthesis model that must combine general classes of objects, scenes, and textures.",
+    "pdf_url": "https://arxiv.org/pdf/1910.04639v3",
+    "published": "2019-10-10"
+  },
+  "2512.14671v2": {
+    "title": "ART: Articulated Reconstruction Transformer",
+    "authors": [
+      "Zizhang Li",
+      "Cheng Zhang",
+      "Zhengqin Li",
+      "Henry Howard-Jenkins",
+      "Zhaoyang Lv",
+      "Chen Geng",
+      "Jiajun Wu",
+      "Richard Newcombe",
+      "Jakob Engel",
+      "Zhao Dong"
+    ],
+    "summary": "We introduce ART, Articulated Reconstruction Transformer -- a category-agnostic, feed-forward model that reconstructs complete 3D articulated objects from only sparse, multi-state RGB images. Previous methods for articulated object reconstruction either rely on slow optimization with fragile cross-state correspondences or use feed-forward models limited to specific object categories. In contrast, ART treats articulated objects as assemblies of rigid parts, formulating reconstruction as part-based prediction. Our newly designed transformer architecture maps sparse image inputs to a set of learnable part slots, from which ART jointly decodes unified representations for individual parts, including their 3D geometry, texture, and explicit articulation parameters. The resulting reconstructions are physically interpretable and readily exportable for simulation. Trained on a large-scale, diverse dataset with per-part supervision, and evaluated across diverse benchmarks, ART achieves significant improvements over existing baselines and establishes a new state of the art for articulated object reconstruction from image inputs.",
+    "pdf_url": "https://arxiv.org/pdf/2512.14671v2",
+    "published": "2025-12-16"
+  }
+}

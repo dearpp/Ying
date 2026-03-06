@@ -1,0 +1,75 @@
+{
+  "2310.08437v2": {
+    "title": "Cold Start Latency in Serverless Computing: A Systematic Review, Taxonomy, and Future Directions",
+    "authors": [
+      "Muhammed Golec",
+      "Guneet Kaur Walia",
+      "Mohit Kumar",
+      "Felix Cuadrado",
+      "Sukhpal Singh Gill",
+      "Steve Uhlig"
+    ],
+    "summary": "Recently, academics and the corporate sector have paid attention to serverless computing, which enables dynamic scalability and an economic model. In serverless computing, users only pay for the time they actually use resources, enabling zero scaling to optimise cost and resource utilisation. However, this approach also introduces the serverless cold start problem. Researchers have developed various solutions to address the cold start problem, yet it remains an unresolved research area. In this article, we propose a systematic literature review on clod start latency in serverless computing. Furthermore, we create a detailed taxonomy of approaches to cold start latency, which we use to investigate existing techniques for reducing the cold start time and frequency. We have classified the current studies on cold start latency into several categories such as caching and application-level optimisation-based solutions, as well as Artificial Intelligence (AI)/Machine Learning (ML)-based solutions. Moreover, we have analyzed the impact of cold start latency on quality of service, explored current cold start latency mitigation methods, datasets, and implementation platforms, and classified them into categories based on their common characteristics and features. Finally, we outline the open challenges and highlight the possible future directions.",
+    "pdf_url": "https://arxiv.org/pdf/2310.08437v2",
+    "published": "2023-10-12"
+  },
+  "0708.1512v1": {
+    "title": "Solving the Hamiltonian path problem with a light-based computer",
+    "authors": [
+      "Mihai Oltean"
+    ],
+    "summary": "In this paper we propose a special computational device which uses light rays for solving the Hamiltonian path problem on a directed graph. The device has a graph-like representation and the light is traversing it by following the routes given by the connections between nodes. In each node the rays are uniquely marked so that they can be easily identified. At the destination node we will search only for particular rays that have passed only once through each node. We show that the proposed device can solve small and medium instances of the problem in reasonable time.",
+    "pdf_url": "https://arxiv.org/pdf/0708.1512v1",
+    "published": "2007-08-10"
+  },
+  "2211.02350v1": {
+    "title": "Tierkreis: A Dataflow Framework for Hybrid Quantum-Classical Computing",
+    "authors": [
+      "Seyon Sivarajah",
+      "Lukas Heidemann",
+      "Alan Lawrence",
+      "Ross Duncan"
+    ],
+    "summary": "We present Tierkreis, a higher-order dataflow graph program representation and runtime designed for compositional, quantum-classical hybrid algorithms. The design of the system is motivated by the remote nature of quantum computers, the need for hybrid algorithms to involve cloud and distributed computing, and the long-running nature of these algorithms. The graph-based representation reflects how designers reason about and visualise algorithms, and allows automatic parallelism and asynchronicity. A strong, static type system and higher-order semantics allow for high expressivity and compositionality in the program. The flexible runtime protocol enables third-party developers to add functionality using any language or environment. With Tierkreis, quantum software developers can easily build, visualise, verify, test, and debug complex hybrid workflows, and immediately deploy them to the cloud or a custom distributed environment.",
+    "pdf_url": "https://arxiv.org/pdf/2211.02350v1",
+    "published": "2022-11-04"
+  },
+  "2403.02240v5": {
+    "title": "Quantum Computing: Vision and Challenges",
+    "authors": [
+      "Sukhpal Singh Gill",
+      "Oktay Cetinkaya",
+      "Stefano Marrone",
+      "Daniel Claudino",
+      "David Haunschild",
+      "Leon Schlote",
+      "Huaming Wu",
+      "Carlo Ottaviani",
+      "Xiaoyuan Liu",
+      "Sree Pragna Machupalli",
+      "Kamalpreet Kaur",
+      "Priyansh Arora",
+      "Ji Liu",
+      "Ahmed Farouk",
+      "Houbing Herbert Song",
+      "Steve Uhlig",
+      "Kotagiri Ramamohanarao"
+    ],
+    "summary": "The recent development of quantum computing, which uses entanglement, superposition, and other quantum fundamental concepts, can provide substantial processing advantages over traditional computing. These quantum features help solve many complex problems that cannot be solved otherwise with conventional computing methods. These problems include modeling quantum mechanics, logistics, chemical-based advances, drug design, statistical science, sustainable energy, banking, reliable communication, and quantum chemical engineering. The last few years have witnessed remarkable progress in quantum software and algorithm creation and quantum hardware research, which has significantly advanced the prospect of realizing quantum computers. It would be helpful to have comprehensive literature research on this area to grasp the current status and find outstanding problems that require considerable attention from the research community working in the quantum computing industry. To better understand quantum computing, this paper examines the foundations and vision based on current research in this area. We discuss cutting-edge developments in quantum computer hardware advancement and subsequent advances in quantum cryptography, quantum software, and high-scalability quantum computers. Many potential challenges and exciting new trends for quantum technology research and development are highlighted in this paper for a broader debate.",
+    "pdf_url": "https://arxiv.org/pdf/2403.02240v5",
+    "published": "2024-03-04"
+  },
+  "2504.10053v2": {
+    "title": "Synthetic Biology meets Neuromorphic Computing: Towards a bio-inspired Olfactory Perception System",
+    "authors": [
+      "Kevin Max",
+      "Larissa Sames",
+      "Shimeng Ye",
+      "Jan Steink\u00fchler",
+      "Federico Corradi"
+    ],
+    "summary": "In this study, we explore how the combination of synthetic biology, neuroscience modeling, and neuromorphic electronic systems offers a new approach to creating an artificial system that mimics the natural sense of smell. We argue that a co-design approach offers significant advantages in replicating the complex dynamics of odor sensing and processing. We propose a hybrid system of synthetic sensory neurons that provides three key features: (a) receptor-gated ion channels, (b) interface between synthetic biology and semiconductors and (c) event-based encoding and computing based on spiking networks. Our approach is validated using simulation-based modeling of the complete sensing and processing pipeline. This research seeks to develop a platform for ultra-sensitive, specific, and energy-efficient odor detection, with potential implications for environmental monitoring, medical diagnostics, and security.",
+    "pdf_url": "https://arxiv.org/pdf/2504.10053v2",
+    "published": "2025-04-14"
+  }
+}

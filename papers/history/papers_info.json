@@ -1,0 +1,21 @@
+{
+  "1110.0625v1": {
+    "title": "On the history of the isomorphism problem of dynamical systems with special regard to von Neumann's contribution",
+    "authors": [
+      "Miklos Redei",
+      "Charlotte Werndl"
+    ],
+    "summary": "This paper reviews some major episodes in the history of the spatial isomorphism problem of dynamical systems theory (ergodic theory). In particular, by analysing, both systematically and in historical context, a hitherto unpublished letter written in 1941 by John von Neumann to Stanislaw Ulam, this paper clarifies von Neumann's contribution to discovering the relationship between spatial isomorphism and spectral isomorphism. The main message of the paper is that von Neumann's argument described in his letter to Ulam is the very first proof that spatial isomorphism and spectral isomorphism are not equivalent because spectral isomorphism is weaker than spatial isomorphism: von Neumann shows that spectrally isomorphic ergodic dynamical systems with mixed spectra need not be spatially isomorphic.",
+    "pdf_url": "https://arxiv.org/pdf/1110.0625v1",
+    "published": "2011-10-04"
+  },
+  "2009.02331v3": {
+    "title": "History entanglement entropy",
+    "authors": [
+      "Leonardo Castellani"
+    ],
+    "summary": "A formalism is proposed to describe entangled quantum histories, and their entanglement entropy. We define a history vector, living in a tensor space with basis elements corresponding to the allowed histories, i.e. histories with nonvanishing amplitudes. The amplitudes are the components of the history vector, and contain the dynamical information. Probabilities of measurement sequences, and resulting collapse, are given by generalized Born rules: they are all expressed by means of projections and scalar products involving the history vector. Entangled history states are introduced, and a history density matrix is defined in terms of ensembles of history vectors. The corresponding history entropies (and history entanglement entropies for composite systems) are explicitly computed in two examples taken from quantum computation circuits.",
+    "pdf_url": "https://arxiv.org/pdf/2009.02331v3",
+    "published": "2020-09-04"
+  }
+}
