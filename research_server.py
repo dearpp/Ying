@@ -7,12 +7,18 @@ from mcp.server.fastmcp import FastMCP
 #from mcp.client.sse import sse_client
 
 
-
-
 # Initialize FastMCP server
-#mcp = FastMCP("research")  
-#mcp = FastMCP("research", port=8001)       #修改的地方
-mcp = FastMCP("research", host="127.0.0.1", port=8002)
+
+PORT = int(os.environ.get("PORT", "10000"))  # Render 默认 10000     改成这样为了跟render相连接；
+mcp = FastMCP("research", host="0.0.0.0", port=PORT)
+
+
+
+# # Initialize FastMCP server
+# #mcp = FastMCP("research")  
+# #mcp = FastMCP("research", port=8001)       #修改的地方
+# mcp = FastMCP("research", host="127.0.0.1", port=8002)
+
 PAPER_DIR = "papers"
 
 @mcp.tool()
@@ -209,38 +215,73 @@ def generate_search_prompt(topic: str, num_papers: int = 5) -> str:
 
 
 
+# if __name__ == "__main__":
+#     import uvicorn
+#     from starlette.applications import Starlette
+#     from starlette.middleware import Middleware
+#     from starlette.middleware.cors import CORSMiddleware
+
+#     # FastMCP 提供的 SSE ASGI app（包含 /sse 及相关路由）
+#     sse_app = mcp.sse_app()
+
+#     # 给 SSE app 加 CORS（让浏览器的 OPTIONS 预检通过）
+#     app = Starlette(
+#         middleware=[
+#             Middleware(
+#                 CORSMiddleware,
+#                 allow_origins=[
+#                     "http://127.0.0.1:6274",
+#                     "http://localhost:6274",
+#                 ],
+#                 allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
+#                 allow_headers=[
+#                     "mcp-protocol-version",
+#                     "mcp-session-id",
+#                     "Authorization",
+#                     "Content-Type",
+#                 ],
+#                 expose_headers=["mcp-session-id"],
+#             )
+#         ]
+#     )
+#     app.mount("/", sse_app)
+
+#     uvicorn.run(app, host="127.0.0.1", port=8002)
+
+
+#下面的修改是为了让render能够部署成功；
 if __name__ == "__main__":
+    import os
     import uvicorn
     from starlette.applications import Starlette
     from starlette.middleware import Middleware
     from starlette.middleware.cors import CORSMiddleware
+    from starlette.responses import PlainTextResponse
 
-    # FastMCP 提供的 SSE ASGI app（包含 /sse 及相关路由）
+    # Render 会注入 PORT；本地没有就用 8002
+    PORT = int(os.environ.get("PORT", "8002"))
+
+    # FastMCP 的 SSE ASGI app（包含 /sse 路由）
     sse_app = mcp.sse_app()
 
-    # 给 SSE app 加 CORS（让浏览器的 OPTIONS 预检通过）
-    app = Starlette(
-        middleware=[
-            Middleware(
-                CORSMiddleware,
-                allow_origins=[
-                    "http://127.0.0.1:6274",
-                    "http://localhost:6274",
-                ],
-                allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
-                allow_headers=[
-                    "mcp-protocol-version",
-                    "mcp-session-id",
-                    "Authorization",
-                    "Content-Type",
-                ],
-                expose_headers=["mcp-session-id"],
-            )
-        ]
+    # 可选：给 Render 做健康检查（避免一直 HEAD / 404）
+    app = Starlette()
+    app.add_route("/", lambda request: PlainTextResponse("ok"), methods=["GET", "HEAD"])
+
+    # 加 CORS（先放开，跑通后再收紧 allow_origins）
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
+        allow_headers=["*"],
+        expose_headers=["mcp-session-id"],
     )
+
+    # 挂载 MCP SSE
     app.mount("/", sse_app)
 
-    uvicorn.run(app, host="127.0.0.1", port=8002)
+    # 关键：绑定 0.0.0.0 + 使用 PORT
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
+    
 
 
-#extract_info('1312.3300v1')
